@@ -1,7 +1,8 @@
-package kr.co.bullets.todoapp.data
+package kr.co.bullets.todoapp.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kr.co.bullets.todoapp.data.models.Priority
 
 @Entity(tableName = "todo_table")
 data class ToDoData(

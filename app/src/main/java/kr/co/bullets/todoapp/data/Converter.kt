@@ -1,6 +1,7 @@
 package kr.co.bullets.todoapp.data
 
 import androidx.room.TypeConverter
+import kr.co.bullets.todoapp.data.models.Priority
 
 class Converter {
 
