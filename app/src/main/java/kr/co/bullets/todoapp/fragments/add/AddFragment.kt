@@ -12,10 +12,12 @@ import kr.co.bullets.todoapp.data.models.Priority
 import kr.co.bullets.todoapp.data.models.ToDoData
 import kr.co.bullets.todoapp.data.viewmodel.ToDoViewModel
 import kr.co.bullets.todoapp.databinding.FragmentAddBinding
+import kr.co.bullets.todoapp.fragments.SharedViewModel
 
 class AddFragment : Fragment() {
     private lateinit var binding: FragmentAddBinding
     private val mToDoViewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +47,13 @@ class AddFragment : Fragment() {
         val mPriority = binding.prioritiesSpinner.selectedItem.toString()
         val mDescription = binding.descriptionEt.text.toString()
 
-        val validation = verifyDataFromUser(mTitle, mDescription)
+        val validation = mSharedViewModel.verifyDataFromUser(mTitle, mDescription)
         if (validation) {
             // Insert Data to Database
             val newData = ToDoData(
                 0,
                 mTitle,
-                parsePriority(mPriority),
+                mSharedViewModel.parsePriority(mPriority),
                 mDescription
             )
             mToDoViewModel.insertData(newData)
@@ -59,23 +61,6 @@ class AddFragment : Fragment() {
             findNavController().navigate(R.id.action_addFragment_to_listFragment)
         } else {
             Toast.makeText(requireContext(), "Please fill out all fields.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun verifyDataFromUser(title: String, description: String): Boolean {
-        return if (TextUtils.isEmpty(title) || TextUtils.isEmpty(description)) {
-            false
-        } else {
-            !(title.isEmpty() || description.isEmpty())
-        }
-    }
-
-    private fun parsePriority(priority: String): Priority {
-        return when (priority) {
-            "High Priority" -> { Priority.HIGH }
-            "Medium Priority" -> { Priority.MEDIUM }
-            "Low Priority" -> { Priority.LOW }
-            else -> Priority.LOW
         }
     }
 }
