@@ -9,7 +9,7 @@
         android:id="@+id/listFragment"
         android:name="kr.co.bullets.todoapp.fragments.list.ListFragment"
         android:label="ToDo List"
-        tools:layout="@layout/fragment_list" >
+        tools:layout="@layout/fragment_list">
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment"
@@ -29,7 +29,7 @@
         android:id="@+id/addFragment"
         android:name="kr.co.bullets.todoapp.fragments.add.AddFragment"
         android:label="Add"
-        tools:layout="@layout/fragment_add" >
+        tools:layout="@layout/fragment_add">
         <action
             android:id="@+id/action_addFragment_to_listFragment"
             app:destination="@id/listFragment"
@@ -40,11 +40,14 @@
         android:id="@+id/updateFragment"
         android:name="kr.co.bullets.todoapp.fragments.update.UpdateFragment"
         android:label="Update"
-        tools:layout="@layout/fragment_update" >
+        tools:layout="@layout/fragment_update">
         <action
             android:id="@+id/action_updateFragment_to_listFragment"
             app:destination="@id/listFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left" />
+        <argument
+            android:name="currentItem"
+            app:argType="kr.co.bullets.todoapp.data.models.ToDoData" />
     </fragment>
 </navigation>

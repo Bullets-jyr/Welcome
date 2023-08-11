@@ -3,6 +3,7 @@ package kr.co.bullets.todoapp.fragments.list
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.bullets.todoapp.R
 import kr.co.bullets.todoapp.data.models.Priority
@@ -18,6 +19,11 @@ class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
         fun bind(item: ToDoData) {
             binding.titleTxt.text = item.title
             binding.descriptionTxt.text = item.description
+            binding.rowBackground.setOnClickListener {
+                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
+//                binding.root.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+                binding.root.findNavController().navigate(action)
+            }
 
             when (item.priority) {
                 Priority.HIGH -> binding.priorityIndicator.setCardBackgroundColor(
