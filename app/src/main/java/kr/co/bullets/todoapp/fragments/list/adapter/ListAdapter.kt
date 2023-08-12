@@ -1,18 +1,14 @@
-package kr.co.bullets.todoapp.fragments.list
+package kr.co.bullets.todoapp.fragments.list.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import kr.co.bullets.todoapp.R
-import kr.co.bullets.todoapp.data.models.Priority
 import kr.co.bullets.todoapp.data.models.ToDoData
 import kr.co.bullets.todoapp.databinding.RowLayoutBinding
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    private var dataList = emptyList<ToDoData>()
+    var dataList = emptyList<ToDoData>()
 
     class MyViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
