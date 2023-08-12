@@ -15,7 +15,9 @@ import kr.co.bullets.todoapp.databinding.FragmentUpdateBinding
 import kr.co.bullets.todoapp.fragments.SharedViewModel
 
 class UpdateFragment : Fragment() {
-    private lateinit var binding: FragmentUpdateBinding
+//    private lateinit var binding: FragmentUpdateBinding
+    private var _binding: FragmentUpdateBinding? = null
+    private val binding get() = _binding!!
     private val args by navArgs<UpdateFragmentArgs>()
     private val mSharedViewModel: SharedViewModel by viewModels()
     private val mToDoViewModel: ToDoViewModel by viewModels()
@@ -25,13 +27,16 @@ class UpdateFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentUpdateBinding.inflate(inflater, container, false)
+//        binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        // Data binding
+        _binding = FragmentUpdateBinding.inflate(inflater, container, false)
+        binding.args = args
 
         setHasOptionsMenu(true)
 
-        binding.currentTitleEt.setText(args.currentItem.title)
-        binding.currentDescriptionEt.setText(args.currentItem.description)
-        binding.currentPrioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
+//        binding.currentTitleEt.setText(args.currentItem.title)
+//        binding.currentDescriptionEt.setText(args.currentItem.description)
+//        binding.currentPrioritiesSpinner.setSelection(mSharedViewModel.parsePriorityToInt(args.currentItem.priority))
         binding.currentPrioritiesSpinner.onItemSelectedListener = mSharedViewModel.listener
 
         return binding.root
@@ -90,5 +95,10 @@ class UpdateFragment : Fragment() {
         builder.setTitle("Delete ${args.currentItem.title}?")
         builder.setMessage("Are you sure you want to remove '${args.currentItem.title}'?")
         builder.create().show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

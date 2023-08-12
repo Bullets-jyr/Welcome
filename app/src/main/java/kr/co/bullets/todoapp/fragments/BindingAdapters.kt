@@ -2,11 +2,13 @@ package kr.co.bullets.todoapp.fragments
 
 import android.util.Log
 import android.view.View
+import android.widget.Spinner
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kr.co.bullets.todoapp.R
+import kr.co.bullets.todoapp.data.models.Priority
 
 class BindingAdapters {
 
@@ -33,5 +35,34 @@ class BindingAdapters {
                 else -> view.visibility = View.INVISIBLE
             }
         }
+
+        @BindingAdapter("android:parsePriorityToInt")
+        @JvmStatic
+        fun parsePriorityToInt(view: Spinner, priority: Priority){
+            when(priority){
+                Priority.HIGH -> { view.setSelection(0) }
+                Priority.MEDIUM -> { view.setSelection(1) }
+                Priority.LOW -> { view.setSelection(2) }
+            }
+        }
+
+//        @BindingAdapter("android:parsePriorityColor")
+//        @JvmStatic
+//        fun parsePriorityColor(cardView: CardView, priority: Priority){
+//            when(priority){
+//                Priority.HIGH -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.red)) }
+//                Priority.MEDIUM -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.yellow)) }
+//                Priority.LOW -> { cardView.setCardBackgroundColor(cardView.context.getColor(R.color.green)) }
+//            }
+//        }
+
+//        @BindingAdapter("android:sendDataToUpdateFragment")
+//        @JvmStatic
+//        fun sendDataToUpdateFragment(view: ConstraintLayout, currentItem: ToDoData){
+//            view.setOnClickListener {
+//                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentItem)
+//                view.findNavController().navigate(action)
+//            }
+//        }
     }
 }
