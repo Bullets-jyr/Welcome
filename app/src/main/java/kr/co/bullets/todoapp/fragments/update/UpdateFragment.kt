@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kr.co.bullets.todoapp.R
-import kr.co.bullets.todoapp.data.models.Priority
 import kr.co.bullets.todoapp.data.models.ToDoData
 import kr.co.bullets.todoapp.data.viewmodel.ToDoViewModel
 import kr.co.bullets.todoapp.databinding.FragmentUpdateBinding
@@ -77,7 +76,7 @@ class UpdateFragment : Fragment() {
     private fun confirmItemRemoval() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
-            mToDoViewModel.deleteData(args.currentItem)
+            mToDoViewModel.deleteItem(args.currentItem)
             Toast.makeText(
                 requireContext(),
                 "Successfully Removed: ${args.currentItem.title}",
