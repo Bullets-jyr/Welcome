@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kr.co.bullets.todoapp.R
 import kr.co.bullets.todoapp.data.viewmodel.ToDoViewModel
 import kr.co.bullets.todoapp.databinding.FragmentListBinding
+import kr.co.bullets.todoapp.fragments.SharedViewModel
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
@@ -19,6 +20,7 @@ class ListFragment : Fragment() {
         ListAdapter()
     }
     private val mToDoViewModel: ToDoViewModel by viewModels()
+    private val mSharedViewModel: SharedViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +33,12 @@ class ListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity())
 
         mToDoViewModel.getAllData.observe(viewLifecycleOwner, Observer { data ->
+            mSharedViewModel.checkIfDatabaseEmpty(data)
             adapter.setData(data)
+        })
+
+        mSharedViewModel.emptyDatabase.observe(viewLifecycleOwner, Observer {
+            showEmptyDatabaseViews(it)
         })
 
         binding.floatingActionButton.setOnClickListener {
@@ -46,6 +53,16 @@ class ListFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    private fun showEmptyDatabaseViews(emptyDatabase: Boolean) {
+        if (emptyDatabase) {
+            binding.noDataImageView.visibility = View.VISIBLE
+            binding.noDataTextView.visibility = View.VISIBLE
+        } else {
+            binding.noDataImageView.visibility = View.INVISIBLE
+            binding.noDataTextView.visibility = View.INVISIBLE
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
