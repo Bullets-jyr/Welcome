@@ -12,45 +12,55 @@ import kr.co.bullets.todoapp.databinding.RowLayoutBinding
 
 class ListAdapter : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-    var dataList = emptyList<ToDoData>()
+    private var dataList = emptyList<ToDoData>()
 
     class MyViewHolder(private val binding: RowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ToDoData) {
-            binding.titleTxt.text = item.title
-            binding.descriptionTxt.text = item.description
-            binding.rowBackground.setOnClickListener {
-                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(item)
-//                binding.root.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
-                binding.root.findNavController().navigate(action)
-            }
+        fun bind(toDoData: ToDoData) {
+            binding.toDoData = toDoData
+            binding.executePendingBindings()
+//            binding.titleTxt.text = toDoData.title
+//            binding.descriptionTxt.text = toDoData.description
+//            binding.rowBackground.setOnClickListener {
+//                val action = ListFragmentDirections.actionListFragmentToUpdateFragment(toDoData)
+////                binding.root.findNavController().navigate(R.id.action_listFragment_to_updateFragment)
+//                binding.root.findNavController().navigate(action)
+//            }
 
-            when (item.priority) {
-                Priority.HIGH -> binding.priorityIndicator.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.red
-                    )
-                )
-                Priority.MEDIUM -> binding.priorityIndicator.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.yellow
-                    )
-                )
-                Priority.LOW -> binding.priorityIndicator.setCardBackgroundColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.green
-                    )
-                )
+//            when (toDoData.priority) {
+//                Priority.HIGH -> binding.priorityIndicator.setCardBackgroundColor(
+//                    ContextCompat.getColor(
+//                        binding.root.context,
+//                        R.color.red
+//                    )
+//                )
+//                Priority.MEDIUM -> binding.priorityIndicator.setCardBackgroundColor(
+//                    ContextCompat.getColor(
+//                        binding.root.context,
+//                        R.color.yellow
+//                    )
+//                )
+//                Priority.LOW -> binding.priorityIndicator.setCardBackgroundColor(
+//                    ContextCompat.getColor(
+//                        binding.root.context,
+//                        R.color.green
+//                    )
+//                )
+//            }
+        }
+        companion object{
+            fun from(parent: ViewGroup): MyViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = RowLayoutBinding.inflate(layoutInflater, parent, false)
+                return MyViewHolder(binding)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = RowLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+//        val binding = RowLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+//        return MyViewHolder(binding)
+        return MyViewHolder.from(parent)
     }
 
     override fun getItemCount(): Int {
