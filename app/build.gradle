@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'kr.co.bullets.todoapp'
+    namespace 'kr.co.bullets.welcome'
     compileSdk 33
 
     defaultConfig {
-        applicationId "kr.co.bullets.todoapp"
+        applicationId "kr.co.bullets.welcome"
         minSdk 26
         targetSdk 33
         versionCode 1

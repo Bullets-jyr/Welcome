@@ -7,7 +7,7 @@
 
         <variable
             name="mSharedViewModel"
-            type="kr.co.bullets.todoapp.fragments.SharedViewModel" />
+            type="kr.co.bullets.welcome.fragments.SharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="args"
-            type="kr.co.bullets.todoapp.fragments.update.UpdateFragmentArgs" />
+            type="kr.co.bullets.welcome.fragments.update.UpdateFragmentArgs" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
