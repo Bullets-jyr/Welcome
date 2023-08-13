@@ -22,6 +22,7 @@ import kr.co.bullets.todoapp.data.viewmodel.ToDoViewModel
 import kr.co.bullets.todoapp.databinding.FragmentListBinding
 import kr.co.bullets.todoapp.fragments.SharedViewModel
 import kr.co.bullets.todoapp.fragments.list.adapter.ListAdapter
+import kr.co.bullets.todoapp.utils.hideKeyboard
 
 class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 //    private lateinit var binding: FragmentListBinding
@@ -67,6 +68,9 @@ class ListFragment : Fragment(), SearchView.OnQueryTextListener {
 
         // Set Menu
         setHasOptionsMenu(true)
+
+        // Hide soft keyboard
+        hideKeyboard(requireActivity())
 
         return binding.root
     }
